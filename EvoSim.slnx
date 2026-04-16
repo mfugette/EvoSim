@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="EvoSim.vcxproj" />
+  <Project Path="EvoSim.vcxproj" Id="8667bdca-f87e-47cc-889b-0ca338cba4a6" />
 </Solution>
