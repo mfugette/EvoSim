@@ -10,26 +10,6 @@ void processInput(GLFWwindow* window);
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
-const char* vertexShaderSource =
-"#version 330 core\n"
-"layout (location = 0) in vec3 aPos;\n"
-"layout (location = 1) in vec3 aColor;\n"
-"out vec3 myColor;\n"
-"void main()\n"
-"{\n"
-"   gl_Position = vec4(aPos, 1.0);\n"
-"   myColor = aColor;\n"
-"}\0";
-
-const char* fragmentShaderSource =
-"#version 330 core\n"
-"out vec4 FragColor;\n"
-"in vec3 myColor;\n"
-"void main()\n"
-"{\n"
-"   FragColor = vec4(myColor, 1.0f);\n"
-"}\n\0";
-
 int main()
 {
 	// glfw: initialize and configure
@@ -59,7 +39,7 @@ int main()
 		return -1;
 	}
 
-	Shader myShader(vertexShaderSource, fragmentShaderSource);
+	Shader myShader("shader.vs", "shader.fs");
 
 	float vertices[] = {
 		// positions         // colors
@@ -97,7 +77,6 @@ int main()
 
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
-		//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

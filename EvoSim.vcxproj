@@ -135,6 +135,10 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Terrain.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="shader.fs" />
+    <None Include="shader.vs" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
