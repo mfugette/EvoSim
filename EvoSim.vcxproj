@@ -139,8 +139,8 @@
     <ClInclude Include="Terrain.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="texture.fs" />
-    <None Include="texture.vs" />
+    <None Include="coordinate_system.fs" />
+    <None Include="coordinate_system.vs" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EvoSim.rc" />

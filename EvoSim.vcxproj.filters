@@ -43,8 +43,8 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="texture.vs" />
-    <None Include="texture.fs" />
+    <None Include="coordinate_system.vs" />
+    <None Include="coordinate_system.fs" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EvoSim.rc">
