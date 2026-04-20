@@ -45,6 +45,7 @@
   <ItemGroup>
     <None Include="camera.vs" />
     <None Include="camera.fs" />
+    <None Include="terrain.vs" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EvoSim.rc">
