@@ -1,6 +1,60 @@
+# ============================================================
+#  Visual Studio
+# ============================================================
+
+# IDE metadata & local settings
 .vs/
-x64/
-Debug/
-Release/
 *.user
 *.suo
+*.aps
+
+# IntelliSense / browse database
+*.ipch
+*.db
+*.opendb
+
+# ============================================================
+#  Build output (both x64 folder locations)
+# ============================================================
+
+# Solution-level output (exe, pdb, dll)
+x64/
+Win32/
+
+# Project-level intermediates (obj, tlog, etc.)
+EvoSim/x64/
+EvoSim/Win32/
+
+# Generic catch-all for any other config/platform combos
+Debug/
+Release/
+bin/
+obj/
+
+# Compiled artifacts
+*.exe
+*.ilk
+*.pdb
+*.iobj
+*.ipdb
+*.obj
+*.res
+
+# Build logs and incremental build tracking
+*.log
+*.tlog
+*.recipe
+*.FileListAbsolute.txt
+*.lastbuildstate
+
+# ============================================================
+#  Windows / OS
+# ============================================================
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+
+# ============================================================
+#  vcpkg (if used for GLFW, GLAD, GLM, etc.)
+# ============================================================
+vcpkg_installed/
