@@ -10,11 +10,15 @@ class Terrain {
 public:
 	int Width;
 	int Depth;
-	float Scale; // noise zoom (smaller = smoother)
+	float Scale;
 	float HeightMultiplier;
 	int Octaves; // FMB layers
 
-	Terrain(int width = 128, int depth = 128, float scale = 0.05f, float heightMultiplier = 20.0f, int octaves = 6) {
+	Terrain(int width = 128, int depth = 128, float scale = 0.05f,
+		float heightMultiplier = 20.0f, int octaves = 6)
+		: Width(width), Depth(depth), Scale(scale),
+		HeightMultiplier(heightMultiplier), Octaves(octaves)
+	{
 		generateHeightMap();
 		buildMesh();
 	}
@@ -83,7 +87,7 @@ private:
 			for (int x = 0; x < Width; x++) {
 				float nx = x * Scale;
 				float nz = z * Scale;
-				float h = stb_perlin_noise3(nx, 0.0f, nz, 2.0f, 0.5f, Octaves);
+				float h = stb_perlin_fbm_noise3(nx, 0.0f, nz, 2.0f, 0.5f, Octaves);
 				heightmap[z * Width + x] = h * HeightMultiplier;
 			}
 		}
@@ -102,7 +106,7 @@ private:
 		for (int z = 0; z < Depth; z++) {
 			for (int x = 0; x < Width; x++) {
 				Vertex v;
-				v.Position = glm::vec3(x = halfW, heightmap[z * Width + x], z - halfD);
+				v.Position = glm::vec3(x - halfW, heightmap[z * Width + x], z - halfD);
 				v.Normal = glm::vec3(0.0f);
 				vertices.push_back(v);
 			}
