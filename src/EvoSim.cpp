@@ -185,7 +185,7 @@ int main()
 		"resources/textures/snow.png"
 	);
 
-	Shader terrainShader("shaders/terrain.vs", "shaders/tempTerrain.fs");
+	Shader terrainShader("shaders/terrain.vs", "shaders/terrain.fs");
 
 	terrainShader.use();
 	terrainShader.setVec3("lightDir", glm::normalize(glm::vec3(0.4f, 1.0f, 0.3f)));

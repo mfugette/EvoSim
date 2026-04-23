@@ -74,9 +74,6 @@
     <None Include="shaders\terrain.fs">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="shaders\tempTerrain.fs">
-      <Filter>Shaders</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EvoSim.rc">

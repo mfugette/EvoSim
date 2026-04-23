@@ -148,7 +148,6 @@
   <ItemGroup>
     <None Include="shaders\camera.fs" />
     <None Include="shaders\camera.vs" />
-    <None Include="shaders\tempTerrain.fs" />
     <None Include="shaders\terrain.fs" />
     <None Include="shaders\terrain.vs" />
   </ItemGroup>
