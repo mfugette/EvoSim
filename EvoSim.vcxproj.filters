@@ -74,6 +74,9 @@
     <None Include="shaders\terrain.fs">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="shaders\tempTerrain.fs">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EvoSim.rc">
@@ -81,12 +84,6 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="resources\textures\container.jpg">
-      <Filter>Resource Files\Textures</Filter>
-    </Image>
-    <Image Include="resources\textures\awesomeface.png">
-      <Filter>Resource Files\Textures</Filter>
-    </Image>
     <Image Include="resources\textures\rocky-moss.jpg">
       <Filter>Resource Files\Textures</Filter>
     </Image>

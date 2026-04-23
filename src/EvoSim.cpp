@@ -57,8 +57,8 @@ int main()
 
 	glEnable(GL_DEPTH_TEST);
 
-	Terrain terrain(128, 128, 0.05f, 20.0f, 6);
-	Shader myShader("shaders/camera.vs", "shaders/camera.fs");
+	Terrain terrain(128, 128, 0.05f, 10.0f, 6);
+	Shader cameraShader("shaders/camera.vs", "shaders/camera.fs");
 
 	//float vertices[] = {
 	//	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
@@ -171,14 +171,23 @@ int main()
 	//}
 	//stbi_image_free(data);
 
-	//myShader.use();
-	//glUniform1i(glGetUniformLocation(myShader.ID, "texture1"), 0);
-	//glUniform1i(glGetUniformLocation(myShader.ID, "texture2"), 1);
+	//cameraShader.use();
+	//glUniform1i(glGetUniformLocation(cameraShader.ID, "texture1"), 0);
+	//glUniform1i(glGetUniformLocation(cameraShader.ID, "texture2"), 1);
 
-	Shader terrainShader("shaders/terrain.vs", "shaders/terrain.fs");
+	terrain.LoadTextures(
+		"resources/textures/water_deep.png",
+		"resources/textures/water_shallow.png",
+		"resources/textures/sand.png",
+		"resources/textures/grass.png",
+		"resources/textures/forest.png",
+		"resources/textures/rock.png",
+		"resources/textures/snow.png"
+	);
+
+	Shader terrainShader("shaders/terrain.vs", "shaders/tempTerrain.fs");
 
 	terrainShader.use();
-
 	terrainShader.setVec3("lightDir", glm::normalize(glm::vec3(0.4f, 1.0f, 0.3f)));
 	terrainShader.setVec3("lightColor", glm::vec3(1.0f, 0.95f, 0.8f));
 	terrainShader.setFloat("heightDeepWater", -12.0f);
@@ -191,6 +200,7 @@ int main()
 	terrainShader.setFloat("fogStart", 60.0f);
 	terrainShader.setFloat("fogEnd", 120.0f);
 	terrainShader.setVec3("fogColor", glm::vec3(0.2f, 0.3f, 0.3f));
+	terrainShader.setFloat("texScale", 0.05f);
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -208,16 +218,16 @@ int main()
 		//glBindTexture(GL_TEXTURE_2D, texture2);
 
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Fov), (float)SCR_WIDTH / SCR_HEIGHT, 0.1f, 100.0f);
-		myShader.setMat4("projection", projection);
+		cameraShader.setMat4("projection", projection);
 		glm::mat4 view = camera.GetViewMatrix();
-		myShader.setMat4("view", view);
+		cameraShader.setMat4("view", view);
 
 		//glBindVertexArray(VAO);
 		//glm::mat4 model = glm::mat4(1.0f);
 		//model = glm::translate(model, cubePositions[0]);
 		//float angle = 20.0f * 0;
 		//model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
-		//myShader.setMat4("model", model);
+		//cameraShader.setMat4("model", model);
 		//glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		terrainShader.use();
@@ -232,7 +242,7 @@ int main()
 		//	model = glm::translate(model, cubePositions[i]);
 		//	float angle = 20.0f * i;
 		//	model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
-		//	myShader.setMat4("model", model);
+		//	cameraShader.setMat4("model", model);
 		//	glDrawArrays(GL_TRIANGLES, 0, 36);
 		//}
 

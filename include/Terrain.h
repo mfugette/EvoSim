@@ -5,6 +5,7 @@
 #include <cmath>
 #include "Shader.h"
 #include "stb_perlin.h"
+#include "stb_image.h"
 
 class Terrain {
 public:
@@ -27,14 +28,56 @@ public:
 		glDeleteVertexArrays(1, &VAO);
 		glDeleteBuffers(1, &VBO);
 		glDeleteBuffers(1, &EBO);
+		glDeleteTextures(NUM_TEXTURES, textureIDs);
+	}
+
+	void LoadTextures(
+		const std::string& deepWaterPath,
+		const std::string& shallowPath,
+		const std::string& sandPath,
+		const std::string& grassPath,
+		const std::string& forestPath,
+		const std::string& rockPath,
+		const std::string& snowPath
+	) {
+		std::string paths[NUM_TEXTURES] = {
+			deepWaterPath,
+			shallowPath,
+			sandPath,
+			grassPath,
+			forestPath,
+			rockPath,
+			snowPath
+		};
+
+		glGenTextures(NUM_TEXTURES, textureIDs);
+
+		for (int i = 0; i < NUM_TEXTURES; i++) {
+			glBindTexture(GL_TEXTURE_2D, textureIDs[i]);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+			int width, height, nrChannels;
+			unsigned char* data = stbi_load(paths[i].c_str(), &width, &height, &nrChannels, 0);
+			if (data) {
+				GLenum format = (nrChannels == 4) ? GL_RGBA : GL_RGB;
+				glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+				glGenerateMipmap(GL_TEXTURE_2D);
+			}
+			else {
+				std::cout << "Terrain: failed to load texture: " << paths[i] << std::endl;
+			}
+			stbi_image_free(data);
+		}
 	}
 
 	float GetHeight(int x, int z) const {
-		if (x < 0 || x >= Width || z < 0 || z >= Depth)
-			return 0.0f;
+		if (x < 0 || x >= Width || z < 0 || z >= Depth) return 0.0f;
 		return heightmap[z * Width + x];
 	}
-	
+
 	float GetHeightInterpolated(float worldX, float worldZ) const {
 		float hx = worldX + Width * 0.5f;
 		float hz = worldZ + Depth * 0.5f;
@@ -60,17 +103,33 @@ public:
 		return glm::mix(glm::mix(h00, h10, tx), glm::mix(h01, h11, tx), tz);
 	}
 
-	void Draw(Shader &shader) {
+	void Draw(Shader& shader) {
+		const char* samplerNames[NUM_TEXTURES] = {
+			"uDeepWater", "uShallow", "uSand",
+			"uGrass", "uForest", "uRock", "uSnow"
+		};
+		for (int i = 0; i < NUM_TEXTURES; i++) {
+			glActiveTexture(GL_TEXTURE0 + i);
+			glBindTexture(GL_TEXTURE_2D, textureIDs[i]);
+			shader.setInt(samplerNames[i], i);
+		}
+
 		glm::mat4 model = glm::mat4(1.0f);
 		shader.setMat4("model", model);
 
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
+
+		for (int i = 0; i < NUM_TEXTURES; i++) {
+			glActiveTexture(GL_TEXTURE0 + i);
+			glBindTexture(GL_TEXTURE_2D, 0);
+		}
 	}
 
-
 private:
+	static const int NUM_TEXTURES = 7;
+	unsigned int textureIDs[NUM_TEXTURES] = {};
 	unsigned int VAO, VBO, EBO;
 	int indexCount;
 	std::vector<float> heightmap;
@@ -143,7 +202,7 @@ private:
 			v2.Normal += faceNormal;
 		}
 
-		for (auto &v : vertices)
+		for (auto& v : vertices)
 			v.Normal = glm::normalize(v.Normal);
 
 		indexCount = static_cast<int>(indices.size());
@@ -166,9 +225,5 @@ private:
 		glEnableVertexAttribArray(1);
 
 		glBindVertexArray(0);
-
-
-
-
 	}
 };

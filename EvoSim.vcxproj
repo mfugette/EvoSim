@@ -148,6 +148,7 @@
   <ItemGroup>
     <None Include="shaders\camera.fs" />
     <None Include="shaders\camera.vs" />
+    <None Include="shaders\tempTerrain.fs" />
     <None Include="shaders\terrain.fs" />
     <None Include="shaders\terrain.vs" />
   </ItemGroup>
@@ -155,8 +156,6 @@
     <ResourceCompile Include="EvoSim.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="resources\textures\container.jpg" />
-    <Image Include="resources\textures\awesomeface.png" />
     <Image Include="resources\textures\rocky-moss.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
