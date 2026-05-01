@@ -163,8 +163,6 @@
     <ClInclude Include="include\Skybox.h" />
     <ClInclude Include="include\Terrain.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="vendor\stb_image.h" />
-    <ClInclude Include="vendor\stb_perlin.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\camera.frag" />

@@ -9,9 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Header Files\Vendor">
-      <UniqueIdentifier>{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Shaders">
       <UniqueIdentifier>{B2C3D4E5-F6A7-8901-BCDE-F12345678901}</UniqueIdentifier>
       <Extensions>vs;fs;vert;frag;glsl</Extensions>
@@ -56,12 +53,6 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="vendor\stb_image.h">
-      <Filter>Header Files\Vendor</Filter>
-    </ClInclude>
-    <ClInclude Include="vendor\stb_perlin.h">
-      <Filter>Header Files\Vendor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
