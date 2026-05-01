@@ -4,24 +4,21 @@
 #include "Shader.h"
 #include "Camera.h"
 #include "Terrain.h"
-#include "stb_image.h"
-#include "stb_perlin.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow* window);
-
+ 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
 Camera camera(glm::vec3(0.0f, 40.0f, 80.0f));
 bool firstMouse = true;
 float lastX = SCR_WIDTH / 2.0f;
-float lastY = SCR_HEIGHT / 2.0f;
+float lastY = SCR_HEIGHT / 2.0f; 
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
@@ -59,8 +56,8 @@ int main()
 
 	Terrain terrain(128, 128, 0.05f, 10.0f, 6);
 
-	Shader cameraShader("shaders/camera.vs", "shaders/camera.fs");
-	Shader terrainShader("shaders/terrain.vs", "shaders/terrain.fs");
+	Shader cameraShader("shaders/camera.vert", "shaders/camera.frag");
+	Shader terrainShader("shaders/terrain.vert", "shaders/terrain.frag");
 
 	terrain.LoadTextures(
 		"resources/textures/water_deep.png",
@@ -75,13 +72,15 @@ int main()
 	terrainShader.use();
 	terrainShader.setVec3("lightDir", glm::normalize(glm::vec3(0.4f, 1.0f, 0.3f)));
 	terrainShader.setVec3("lightColor", glm::vec3(1.0f, 0.95f, 0.8f));
+
 	terrainShader.setFloat("heightDeepWater", -12.0f);
 	terrainShader.setFloat("heightShallow", -4.0f);
 	terrainShader.setFloat("heightSand", -1.0f);
-	terrainShader.setFloat("heightGrass", 4.0f);
+	terrainShader.setFloat("heightGrass", 2.0f);
 	terrainShader.setFloat("heightForest", 10.0f);
 	terrainShader.setFloat("heightRock", 15.0f);
 	terrainShader.setFloat("heightSnow", 19.0f);
+
 	terrainShader.setFloat("fogStart", 60.0f);
 	terrainShader.setFloat("fogEnd", 120.0f);
 	terrainShader.setVec3("fogColor", glm::vec3(0.2f, 0.3f, 0.3f));
@@ -95,8 +94,9 @@ int main()
 
 		processInput(window);
 
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		//glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Fov), (float)SCR_WIDTH / SCR_HEIGHT, 0.1f, 100.0f);
 		cameraShader.setMat4("projection", projection);

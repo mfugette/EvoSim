@@ -4,8 +4,8 @@
 #include <vector>
 #include <cmath>
 #include "Shader.h"
-#include "stb_perlin.h"
-#include "stb_image.h"
+#include<stb/stb_perlin.h>
+#include<stb/stb_image.h>
 
 class Terrain {
 public:
@@ -13,7 +13,7 @@ public:
 	int Depth;
 	float Scale;
 	float HeightMultiplier;
-	int Octaves; // FMB layers
+	int Octaves;
 
 	Terrain(int width = 128, int depth = 128, float scale = 0.05f,
 		float heightMultiplier = 20.0f, int octaves = 6)

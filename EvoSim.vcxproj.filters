@@ -34,6 +34,9 @@
     <ClCompile Include="src\stb_perlin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\EvoSim_Temp\glad.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Camera.h">
@@ -62,16 +65,16 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="shaders\camera.vs">
+    <None Include="shaders\camera.vert">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="shaders\camera.fs">
+    <None Include="shaders\camera.frag">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="shaders\terrain.vs">
+    <None Include="shaders\terrain.vert">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="shaders\terrain.fs">
+    <None Include="shaders\terrain.frag">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
